@@ -1,0 +1,1 @@
+https://www.codeproject.com/Articles/5819/Ternary-Search-Tree-Dictionary-in-C-Faster-String
