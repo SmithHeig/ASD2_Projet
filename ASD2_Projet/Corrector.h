@@ -10,9 +10,15 @@
 
 #include <fstream>
 #include <cctype>
+#include <string>
+#include <algorithm>
+
+#define VERBOSE 1
 
 template <typename DicoType>
 class Corrector {
+private:
+    DicoType dictionary;
     
 public:
     
@@ -48,8 +54,56 @@ public:
     
     
 private:
+    void testSupLetter(std::string word){
+        for(int i = 0; i < word.size(); ++i){
+            std::string temp = word;
+            if(dictionary.contain(temp.erase(i,1))){
+#ifdef VERBOSE
+                std::cout << " " << temp << std::endl;
+#endif
+            }
+        }
+    }
+        
+    void testMissingLetter(std::string word){
+        for(int i = 0; i < word.size(); ++i){
+            std::string temp = word;
+            for(char j = 'a'; 'a' <= 'z'; ++j){
+                if(dictionary.contain(temp.insert(i,1,j))){
+#ifdef VERBOSE
+                    std::cout << " " << temp << std::endl;
+#endif  
+                }
+            }
+        }
+    }
     
-    DicoType dictionary;
+    void testWrongLetter(std::string word){
+        for(int i = 0; i < word.size(); ++i){
+            std::string temp = word;
+            for(char j = 'a'; 'a' <= 'z'; ++j){
+                if(dictionary.contain(temp.replace(i,1,j))){
+#ifdef VERBOSE
+                    std::cout << " " << temp << std::endl;
+#endif  
+                }
+            }
+        }
+    }
+    
+    void testExchangeLetter(std::string word){
+        for(int i = 0; i < word.size() - 1; ++i){
+            std::string temp = word;
+            std::swap(temp[i], temp[i+1]);
+            if(dictionary.contain(temp))){
+#ifdef VERBOSE
+                std::cout << " " << temp << std::endl;
+#endif  
+            }
+        }
+    }
+    
+    
 };
 
 #endif /* CORRECTOR_H */
