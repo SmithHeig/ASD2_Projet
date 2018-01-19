@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <string>
 #include <random>
+#include <math>
 
 
 
@@ -24,13 +25,13 @@ private:
    
     struct Node {
     public:
-        char key;
-        bool isWord;
+        char key;    
+        bool isWord; // indique si c'est la dernière lettre d'un mot
         Node* right; // sous arbre avec des cles plus grandes
         Node* left;  // sous arbre avec des cles plus petites
         Node* front; // sous arbre avec des clé coresspondantes
         
-        int nodeHeight; // Nombre d'élément
+        int nodeHeight; // hauteur du noeud
         
         Node(char key) : key(key), isWord(false), right(nullptr), left(nullptr), front(nullptr), nodeHeight(0) { }
     };
@@ -68,8 +69,7 @@ public:
         //std::cout << "Insert key: " << key << std::endl;
         root = put(root, key);
     }
- 
-private:
+    
     Node* put(Node* x, std::string& key, int d = 0, bool val = true){
         char c = key.at(d);
         
@@ -131,13 +131,41 @@ private:
         
         return x1;
     }
-
-public:
-//    bool contains(std::string& s){
-//        // std::cout << "Get key: " << s << std::endl;
-//        Node* x = get(root, s, 0);
-//        return !(x == nullptr || x->isWord != true);
+    
+//public:
+//     void insert(std::string s){
+//         Node* x = root;
+//         
+//        for(char& c : s){
+//             x = insertChar(x, *c);
+//        }
+//         
+//        x->isWord = true;
+//        
+//     }
+//private:
+//    Node* insertChar(Node* x, char key){
+//        if(x == nullptr)
+//            return new Node(key);
+//        
+//        if(key < x.key)
+//            x = x.left;
+//        else if(key > x->key)
+//            x = x.right;
+//        else // key == y->key
+//            x = x.front;
+//        
+//        x->nodeSize = 1 + size(x->left) + size(x->right) + size(x->front);
+//        
+//        return x;
 //    }
+    
+public:
+    bool contains(std::string& s){
+        // std::cout << "Get key: " << s << std::endl;
+        Node* x = get(root, s, 0);
+        return !(x == nullptr || x->isWord != true);
+    }
 private:
     Node* get(Node* x, std::string& key, int d){
         if(x == nullptr) 
@@ -155,32 +183,10 @@ private:
             return x;
             
     }
- 
-public:
-    bool contains(std::string& s){
-        Node* x = root;
-        auto i = s.begin();
-        
-        while ( x != nullptr ) {
-            if ( *i < x->key )
-                x = x->left;
-            else if ( *i > x->key)
-                x = x->right;
-            else {// x->key == key.
-                if(i == s.end())
-                    return x->isWord;
-                x = x->front;
-                i++;
-            }
-            
-        }
-        return false;
-    }
-    
-    
+
     
     //
-    // Hauteur
+    // Nombre d'elements
     //
 public:
     int height(Node* x){
@@ -192,6 +198,17 @@ private:
     void updateNodeHeight(Node* x){
         x->nodeHeight = std::max(height(x->right), height(x->left)) + 1;
     }
+  
+    /*
+public:
+    int checkHeight(){
+        return che
+    }
+    
+    int checkHeight(Node* x){
+        if(abs(x.nodeHeight)
+    }
+     * */
 };
 
 

@@ -16,7 +16,7 @@
 
 #include "TernarySearchTree.h"
 
-template <typename T>
+
 class DicoTST {
 public:
     
@@ -24,10 +24,10 @@ public:
         dictionary = TernarySearchtree();
     }
     
-    bool contains(T word){
+    bool contains(std::string& word){
         return dictionary.contains(word);
     }
-    void insert(std::string word) {
+    void insert(std::string& word) {
         dictionary.insert(word);
     }
 private:
