@@ -48,11 +48,11 @@ public:
 
             while(!file.eof()){
                 
-                std::cout << "DA" << std::endl;
+                //std::cout << "DA" << std::endl;
                 word = getWord(file);
-                std::cout << "DADA" << std::endl;
+                //std::cout << "DADA" << std::endl;
                 
-                std::cout << word << std::endl;
+                //std::cout << word << std::endl;
                 dictionary.insert(word);
                 word.clear();
             }
@@ -188,14 +188,16 @@ private:
     std::string getWord(std::ifstream& file){
         
         std::string word;
-        char x = file.get();
-        x = tolower(x);
-        while(x != ' '){
+        file >> word;
+        std::string properWord = "";
+        for(int i = 0 ; i < word.size(); i++) {
+            char x = tolower(word.at(i));
+            
             if((x > 'a' && x < 'z') || (x == '\'' && word.size() > 1)){
-                word += x;
+                properWord += x;
             }
-        }
-        return word;
+        }       
+        return properWord;
     }
 };
 
