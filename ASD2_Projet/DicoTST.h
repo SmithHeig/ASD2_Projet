@@ -19,17 +19,38 @@
 
 class DicoTST {
 public:
-    
+    //
+    // Constructor
+    //
     DicoTST(){
         dictionary = TernarySearchtree();
     }
     
+    /**
+     * Regarde si une string est contenue dans le dico TST
+     * @param word  mot à rechercher
+     * @return      true si elle y est, sinon false
+     */
     bool contains(std::string& word){
         return dictionary.contains(word);
     }
+    
+    /**
+     * Sert à insérer un mot dans le TST
+     * @param word  mot à insérer
+     */
     void insert(std::string& word) {
         dictionary.insert(word);
     }
+    
+    /**
+     * Indique si l'arbre est balancé
+     * @return true is l'abre est balancé, sinon false
+     */
+    bool isBalanced(){
+        return dictionary.isBalanced();
+    }
+    
 private:
     TernarySearchtree dictionary;
 };

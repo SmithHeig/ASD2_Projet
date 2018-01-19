@@ -23,14 +23,19 @@
 #define SIMPLE "input_simple.txt"
 #define WIKIPEDIA "input_wikipedia.txt"
 
-using namespace std;
-
 int main(int argc, char** argv) {
 
     // initialisation du correcteur 
     Corrector<DicoHashMap<std::string>> corrector_HashMap(DICO); 
-    Corrector<DicoTST> corrector_TST(DICO); 
-     
+    Corrector<DicoTST> corrector_TST(DICO);
+    /*
+    std::cout << "TST is balanced: ";
+    std::cout<< std::boolalpha << corrector_TST.isBalanced();
+    std::cout << std::endl << std::endl;
+    */
+    
+    std::cout << "TST is balanced: " << corrector_TST.isBalanced() << std::endl << std::endl;
+    
     // Correction 
     // DicoHashMap 
     std::cout << "Hash map:" << std::endl; 
@@ -47,16 +52,17 @@ int main(int argc, char** argv) {
     //corrector_TST.test(SIMPLE); 
     //corrector_TST.test(WIKIPEDIA);
     
-    /*
-    Corrector<DicoTST<std::string>> c2("myInput.txt");
+    
+    Corrector<DicoTST> c2("myInput.txt");
+    std::cout << "TST is balanced: " << c2.isBalanced() << std::endl << std::endl;
     std::cout << "Starto correcto!" << std::endl;
     bool val = c2.contain("jermie");
-    std::cout << "1) " << (c2.contain("late")? true: false) << endl;
-    std::cout << "2) " << (c2.contain("lates")? true: false) << endl;
+    std::cout << "1) " << (c2.contain("late")? true: false) << std::endl;
+    std::cout << "2) " << (c2.contain("lates")? true: false) << std::endl;
     
     c2.test("myInputERR.txt");
     c2.test(LATES);
-    */
+    
     
     return 0;
 }
