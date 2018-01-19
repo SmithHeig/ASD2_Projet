@@ -94,15 +94,14 @@ public:
                 if(!dictionary.contains(word)){
                     
                     fileCorr << "*" << word << std::endl;
-                    std::cout << "T1" << std::endl;
+#ifdef VERBOSE
+                    std::cout <<"*" << word << std::endl;
+#endif
                     testSupLetter(word, fileCorr);
-                    std::cout << "T2" << std::endl;
                     testMissingLetter(word, fileCorr);
-                    std::cout << "T3" << std::endl;
                     testWrongLetter(word, fileCorr);
-                    std::cout << "T4" << std::endl;
                     testExchangeLetter(word, fileCorr);
-                    std::cout << "TEnd" << std::endl;
+                    std::cout << std::endl;
                 }
             }
         }
@@ -120,12 +119,11 @@ private:
             std::string alternativeWord = word;
             if(dictionary.contains(alternativeWord.erase(i,1))){
 #ifdef VERBOSE
-                std::cout << " " << alternativeWord << std::endl;
+                std::cout << " 1)" << alternativeWord << std::endl;
 #endif
-                file << "1)" << alternativeWord << std::endl;
+                file << " 1)" << alternativeWord << std::endl;
             }
         }
-        std::cout << "end t1" << std::endl;
     }
     
     /**
@@ -135,13 +133,13 @@ private:
      */
     void testMissingLetter(std::string word, std::ofstream& file){
         for(int i = 0; i < word.size(); ++i){
-            std::string alternativeWord = word;
             for(char j = 'a'; j <= 'z'; ++j){
+                std::string alternativeWord = word;
                 if(dictionary.contains(alternativeWord.insert(i,1,j))){
 #ifdef VERBOSE
-                    std::cout << " " << alternativeWord << std::endl;
+                    std::cout << " 2)" << alternativeWord << std::endl;
 #endif  
-                file << "2)" << alternativeWord << std::endl;
+                    file << " 2)" << alternativeWord << std::endl;
                 }
             }
         }
@@ -159,9 +157,9 @@ private:
                 //std::string str(1,j);
                 if(dictionary.contains(alternativeWord.replace(i,1,1,j))){
 #ifdef VERBOSE
-                    std::cout << " " << alternativeWord << std::endl;
+                    std::cout << " 3)" << alternativeWord << std::endl;
 #endif  
-                    file << "3)" << alternativeWord << std::endl;
+                    file << " 3)" << alternativeWord << std::endl;
                 }
             }
         }
@@ -178,9 +176,9 @@ private:
             std::swap(alternativeWord[i], alternativeWord[i+1]);
             if(dictionary.contains(alternativeWord)){
 #ifdef VERBOSE
-                std::cout << " " << alternativeWord << std::endl;
+                std::cout << " 4)" << alternativeWord << std::endl;
 #endif  
-                file << "4)" << alternativeWord << std::endl;
+                file << " 4)" << alternativeWord << std::endl;
             }
         }
     }
@@ -198,7 +196,7 @@ private:
         for(int i = 0 ; i < word.size(); i++) {
             char x = tolower(word.at(i));
             
-            if((x > 'a' && x < 'z') || (x == '\'' && word.size() > 1)){
+            if((x >= 'a' && x <= 'z') || (x == '\'' && word.size() > 1)){
                 properWord += x;
             }
         }       
