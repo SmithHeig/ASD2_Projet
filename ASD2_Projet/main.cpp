@@ -25,7 +25,29 @@
 
 int main(int argc, char** argv) {
 
-    // initialisation du correcteur 
+    /*std::cout << "Starto !" << std::endl;
+    // chargement du dico
+    Corrector<DicoHashMap<std::string>> c("MON_DICO.txt");
+    
+    std::cout << "Starto correcto!" << std::endl;
+    c.test("MON_TEXTE.txt");*/
+    //Corrector<DicoHashMap<std::string>> c("dictionary.txt"); 
+    const std::string DICO = "dictionary.txt"; 
+    const std::string LATES = "input_lates.txt"; 
+    const std::string SH = "input_sh.txt"; 
+    const std::string SIMPLE = "input_simple.txt"; 
+    const std::string WIKIPEDIA = "input_wikipedia.txt"; 
+    
+    
+    Corrector<DicoHashMap<std::string>> c(DICO);
+    
+    c.test(SH);
+    
+    //c.test(WIKIPEDIA);
+    
+    
+     /*
+    //initialisation du correcteur 
     Corrector<DicoHashMap<std::string>> corrector_HashMap(DICO); 
     Corrector<DicoTST> corrector_TST(DICO);
     /*
@@ -48,9 +70,9 @@ int main(int argc, char** argv) {
     // DicoTST 
     std::cout << std::endl << "TST test:" << std::endl;
     corrector_TST.test(LATES); 
-    //corrector_TST.test(SH); 
-    //corrector_TST.test(SIMPLE); 
-    //corrector_TST.test(WIKIPEDIA);
+    corrector_TST.test(SH); 
+    corrector_TST.test(SIMPLE); 
+    corrector_TST.test(WIKIPEDIA);*/ 
     
     
     Corrector<DicoTST> c2("myInput.txt");

@@ -51,6 +51,10 @@ public:
         return dictionary.isBalanced();
     }
     
+    
+    static std::string name(){
+        return "Dico using TST";
+    }
 private:
     TernarySearchtree dictionary;
 };

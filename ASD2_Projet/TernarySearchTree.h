@@ -73,6 +73,7 @@ public:
         root = put(root, key);
     }
     
+private:
     /**
      * Insertion d'une string char par char dans le TST
      * @param x     racine d'insértion
@@ -199,7 +200,7 @@ private:
     //
     // Nombre d'elements
     //
-public:
+private:
     /**
      * Indique la heuteur d'un noeud
      * @param x Noeud 
@@ -210,7 +211,7 @@ public:
         
         return x->nodeHeight;
     }
-private:
+
     /**
      * Met à jour la hauteur d'un noeud
      * @param x Noeud à mettre à jour

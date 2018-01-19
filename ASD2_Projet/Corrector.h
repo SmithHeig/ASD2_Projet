@@ -13,6 +13,7 @@
 #include <cctype>
 #include <string>
 #include <algorithm>
+#include <chrono>
 
 #define VERBOSE 1
 
@@ -32,7 +33,7 @@ public:
      */
     Corrector(std::string dico_file_name){
         
-        std::cout << "Chargement du dico !" << std::endl;
+        std::cout << "Chargement du dico en mode " << DicoType::name() << std::endl;
         
         // dictionaire ou stocker nos mots
         dictionary = DicoType();
@@ -52,6 +53,10 @@ public:
                 word = getWord(file);
                 //std::cout << "DADA" << std::endl;
                 
+                // pour gérer des la merde en fin de fichier
+                if(word.empty()){
+                    continue;
+                }
                 //std::cout << word << std::endl;
                 dictionary.insert(word);
                 word.clear();
@@ -69,18 +74,21 @@ public:
      */
     void test(std::string test_file_name){
         
+        using namespace std;
         
-        std::cout << "Start testing " << test_file_name << std::endl;
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+        
+#ifdef VERBOSE  
+        std::cout << "Start testing " << test_file_name << endl;
+#endif
         std::ifstream file;
         
         file.open(test_file_name);
-        
         std::string prefixFile = "corr_";
         std::string prefixWord = "*";
         
         std::ofstream fileCorr;
         fileCorr.open(prefixFile.append(test_file_name), std::ios::out);
-                
         if(!fileCorr) {
             std::cout << "Could not open " << prefixFile.append(test_file_name) << std::endl;
             return;
@@ -92,9 +100,16 @@ public:
             
             while(!file.eof()){
                 word = getWord(file);
+                
+                // pour gérer des la merde en fin de fichier
+                if(word.empty()){
+                    continue;
+                }
+                
                 if(!dictionary.contains(word)){
                     
                     fileCorr << "*" << word << std::endl;
+                    
 #ifdef VERBOSE
                     std::cout <<"*" << word << std::endl;
 #endif
@@ -107,6 +122,11 @@ public:
             }
         }
         file.close();
+        
+        std::chrono::steady_clock::time_point end= std::chrono::steady_clock::now();
+
+        std::cout << "Time elapsed = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() <<std::endl;
+
     }
     
 private:
@@ -191,16 +211,19 @@ private:
      */
     std::string getWord(std::ifstream& file){
         
-        std::string word;
-        file >> word;
         std::string properWord = "";
+        std::string word;
+        
+        file >> word;
+
         for(int i = 0 ; i < word.size(); i++) {
             char x = tolower(word.at(i));
-            
+
             if((x >= 'a' && x <= 'z') || (x == '\'' && word.size() > 1)){
                 properWord += x;
             }
-        }       
+        }  
+        
         return properWord;
     }
     

@@ -31,6 +31,10 @@ public:
     void insert(T word) {
         dictionary.insert(word);
     }
+    
+    static std::string name(){
+        return "Dico using unordered_set";
+    }
 private:
     std::unordered_set<T> dictionary;
 };
