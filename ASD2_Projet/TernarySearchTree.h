@@ -32,7 +32,7 @@ private:
         
         int nodeHeight; // Nombre d'élément
         
-        Node(char key) : key(key), isWord(false), right(nullptr), left(nullptr), front(nullptr), nodeHeight(1) { }
+        Node(char key) : key(key), isWord(false), right(nullptr), left(nullptr), front(nullptr), nodeHeight(0) { }
     };
     
     //
@@ -65,10 +65,11 @@ private:
     
 public:
     void insert(std::string& key){
-        std::cout << "Insert key: " << key << std::endl;
+        //std::cout << "Insert key: " << key << std::endl;
         root = put(root, key);
     }
-    
+ 
+private:
     Node* put(Node* x, std::string& key, int d = 0, bool val = true){
         char c = key.at(d);
         
@@ -77,7 +78,7 @@ public:
         
         if( c < x->key)
             x->left = put(x->left, key, d);
-        else if ( c < x->key)
+        else if ( c > x->key)
             x->right = put(x->right, key, d);
         else if (d < key.size() -1)
             x->front = put(x->front, key, d+1);
@@ -88,12 +89,13 @@ public:
     }
     
     int balance(Node* x){
-        if(x == nullptr) return 0;
+        if(x == nullptr)
+            return 0;
         return height(x->right) - height(x->left);
     }
     
     Node* restoreBalance(Node* x){
-        if(balance(x) < -1) { // right < left -1{
+        if(balance(x) < -1) { // right < left -1
             if(balance(x->left) > 0)
                 x->left = rotateLeft( x-> left);
             x = rotateRight(x);
@@ -104,6 +106,7 @@ public:
             x = rotateLeft(x);
         } else
             updateNodeHeight(x);
+        
         return x;
     }
     
@@ -111,6 +114,9 @@ public:
         Node* x1 = x->left;
         x->left = x1->right;
         x1->right = x;
+        
+        updateNodeHeight(x);
+        updateNodeHeight(x1);
         
         return x1;
     }
@@ -120,40 +126,38 @@ public:
         x->right = x1->left;
         x1->left = x;
         
+        updateNodeHeight(x);
+        updateNodeHeight(x1);
+        
         return x1;
     }
-    
-//public:
-//     void insert(std::string s){
-//         Node* x = root;
-//         
-//        for(char& c : s){
-//             x = insertChar(x, *c);
-//        }
-//         
-//        x->isWord = true;
-//        
-//     }
-//private:
-//    Node* insertChar(Node* x, char key){
-//        if(x == nullptr)
-//            return new Node(key);
-//        
-//        if(key < x.key)
-//            x = x.left;
-//        else if(key > x->key)
-//            x = x.right;
-//        else // key == y->key
-//            x = x.front;
-//        
-//        x->nodeSize = 1 + size(x->left) + size(x->right) + size(x->front);
-//        
-//        return x;
-//    }
-    
+
 public:
-    
-    bool contains(std::string s){
+//    bool contains(std::string& s){
+//        // std::cout << "Get key: " << s << std::endl;
+//        Node* x = get(root, s, 0);
+//        return !(x == nullptr || x->isWord != true);
+//    }
+private:
+    Node* get(Node* x, std::string& key, int d){
+        if(x == nullptr) 
+            return nullptr;
+        
+        char c = key.at(d);
+        
+        if( c < x->key)
+            return get(x->left, key, d);
+        else if ( c > x->key)
+            return get(x->right, key, d);
+        else if (d < key.length() - 1)
+            return get(x->front, key, d+1);
+        else
+            return x;
+            
+    }
+ 
+public:
+    bool contains(std::string& s){
         Node* x = root;
         auto i = s.begin();
         
@@ -176,7 +180,7 @@ public:
     
     
     //
-    // Nombre d'elements
+    // Hauteur
     //
 public:
     int height(Node* x){

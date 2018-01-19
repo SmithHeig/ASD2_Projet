@@ -16,14 +16,15 @@
 
 #include "TernarySearchTree.h"
 
-class DicoHashMap {
+template <typename T>
+class DicoTST {
 public:
     
-    DicoHashMap(){
+    DicoTST(){
         dictionary = TernarySearchtree();
     }
     
-    bool contains(std::string word){
+    bool contains(T word){
         return dictionary.contains(word);
     }
     void insert(std::string word) {

@@ -20,6 +20,7 @@
       <itemPath>input_simple.txt</itemPath>
       <itemPath>input_wikipedia.txt</itemPath>
       <itemPath>myInput.txt</itemPath>
+      <itemPath>myInputERR.txt</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -74,6 +75,8 @@
       </item>
       <item path="myInput.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="myInputERR.txt" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
@@ -120,6 +123,8 @@
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="myInput.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="myInputERR.txt" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
