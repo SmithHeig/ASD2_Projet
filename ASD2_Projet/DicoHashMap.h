@@ -26,7 +26,7 @@ public:
     }
     
     bool contains(T word){
-        return (dictionary.find(word) != dictionary.end);
+        return (dictionary.find(word) != dictionary.end());
     }
     void insert(T word) {
         dictionary.insert(word);
