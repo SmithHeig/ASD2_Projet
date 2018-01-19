@@ -21,10 +21,10 @@ int main(int argc, char** argv) {
 
     std::cout << "Starto !" << std::endl;
     // chargement du dico
-    Corrector<DicoHashMap<std::string>> c("dictionary.txt");
+    Corrector<DicoHashMap<std::string>> c("MON_DICO.txt");
     
     std::cout << "Starto correcto!" << std::endl;
-    c.test("input_late.txt");
+    c.test("MON_TEXTE.txt");
        
     return 0;
 }

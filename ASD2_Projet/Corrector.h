@@ -94,11 +94,15 @@ public:
                 if(!dictionary.contains(word)){
                     
                     fileCorr << "*" << word << std::endl;
-                    
+                    std::cout << "T1" << std::endl;
                     testSupLetter(word, fileCorr);
+                    std::cout << "T2" << std::endl;
                     testMissingLetter(word, fileCorr);
+                    std::cout << "T3" << std::endl;
                     testWrongLetter(word, fileCorr);
+                    std::cout << "T4" << std::endl;
                     testExchangeLetter(word, fileCorr);
+                    std::cout << "TEnd" << std::endl;
                 }
             }
         }
@@ -113,14 +117,15 @@ private:
      */
     void testSupLetter(std::string word, std::ofstream& file){
         for(int i = 0; i < word.size(); ++i){
-            std::string temp = word;
-            if(dictionary.contains(temp.erase(i,1))){
+            std::string alternativeWord = word;
+            if(dictionary.contains(alternativeWord.erase(i,1))){
 #ifdef VERBOSE
-                std::cout << " " << temp << std::endl;
+                std::cout << " " << alternativeWord << std::endl;
 #endif
-                file << "1)" << word << std::endl;
+                file << "1)" << alternativeWord << std::endl;
             }
         }
+        std::cout << "end t1" << std::endl;
     }
     
     /**
@@ -130,13 +135,13 @@ private:
      */
     void testMissingLetter(std::string word, std::ofstream& file){
         for(int i = 0; i < word.size(); ++i){
-            std::string temp = word;
-            for(char j = 'a'; 'a' <= 'z'; ++j){
-                if(dictionary.contains(temp.insert(i,1,j))){
+            std::string alternativeWord = word;
+            for(char j = 'a'; j <= 'z'; ++j){
+                if(dictionary.contains(alternativeWord.insert(i,1,j))){
 #ifdef VERBOSE
-                    std::cout << " " << temp << std::endl;
+                    std::cout << " " << alternativeWord << std::endl;
 #endif  
-                file << "2)" << word << std::endl;
+                file << "2)" << alternativeWord << std::endl;
                 }
             }
         }
@@ -149,14 +154,14 @@ private:
      */
     void testWrongLetter(std::string word, std::ofstream& file){
         for(int i = 0; i < word.size(); ++i){
-            std::string temp = word;
-            for(char j = 'a'; 'a' <= 'z'; ++j){
-                std::string str(1,j);
-                if(dictionary.contains(temp.replace(i,1,str))){
+            std::string alternativeWord = word;
+            for(char j = 'a'; j <= 'z'; ++j){
+                //std::string str(1,j);
+                if(dictionary.contains(alternativeWord.replace(i,1,1,j))){
 #ifdef VERBOSE
-                    std::cout << " " << temp << std::endl;
+                    std::cout << " " << alternativeWord << std::endl;
 #endif  
-                file << "3)" << word << std::endl;
+                    file << "3)" << alternativeWord << std::endl;
                 }
             }
         }
@@ -169,13 +174,13 @@ private:
      */
     void testExchangeLetter(std::string word, std::ofstream& file){
         for(int i = 0; i < word.size() - 1; ++i){
-            std::string temp = word;
-            std::swap(temp[i], temp[i+1]);
-            if(dictionary.contains(temp)){
+            std::string alternativeWord = word;
+            std::swap(alternativeWord[i], alternativeWord[i+1]);
+            if(dictionary.contains(alternativeWord)){
 #ifdef VERBOSE
-                std::cout << " " << temp << std::endl;
+                std::cout << " " << alternativeWord << std::endl;
 #endif  
-                file << "4)" << word << std::endl;
+                file << "4)" << alternativeWord << std::endl;
             }
         }
     }
