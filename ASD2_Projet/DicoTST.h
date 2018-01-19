@@ -14,7 +14,6 @@
 #ifndef DICOTST_H
 #define DICOTST_H
 
-template <typename T>
 class DicoHashMap {
 public:
     
@@ -22,10 +21,10 @@ public:
         //dictionary = std::unordered_set<T>();
     }
     
-    bool contains(T word){
+    bool contains(std::string word){
         return false; //(dictionary.find(word) != dictionary.end);
     }
-    void insert(T word) {
+    void insert(std::string word) {
         //dictionary.insert(word);
     }
 private:

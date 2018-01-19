@@ -30,10 +30,9 @@ private:
         Node* left;  // sous arbre avec des cles plus petites
         Node* front; // sous arbre avec des clé coresspondantes
         
-        int nodeSize; // Nombre d'élément
+        int nodeHeight; // Nombre d'élément
         
-        int nodeSize; // taille du sous-arbre dont ce noeud est la racine.
-        Node(char key) : key(key), isWord(false), right(nullptr), left(nullptr), front(nullptr), nodeSize(1) { }
+        Node(char key) : key(key), isWord(false), right(nullptr), left(nullptr), front(nullptr), nodeHeight(1) { }
     };
     
     //
@@ -84,8 +83,45 @@ public:
         else
             x.isWord = val;
         
+        return restoreBalance(x);
+    }
+    
+    int balance(Node* x){
+        if(x == nullptr) return 0;
+        return height(x->right) - height(x->left);
+    }
+    
+    Node* restoreBalance(Node* x){
+        if(balance(x) < -1) { // right < left -1{
+            if(balance(x->left) > 0)
+                x->left = rotateLeft( x-> left);
+            x = rotateRight(x);
+        }
+        else if( balance(x) > 1){
+            if(balance(x->right) < 0 )
+                x->right = rotateRight( x->right);
+            x = rotateLeft(x);
+        } else
+            updateNodeHeight(x);
         return x;
     }
+    
+    Node* rotateRight(Node* x){
+        Node* x1 = x->left;
+        x->left = x1->right;
+        x1->right = x;
+        
+        return x1;
+    }
+    
+    Node* rotateLeft(Node* x){
+        Node* x1 = x->right;
+        x->right = x1->left;
+        x1->left = x;
+        
+        return x1;
+    }
+    
 //public:
 //     void insert(std::string s){
 //         Node* x = root;
@@ -136,16 +172,20 @@ public:
         return false;
     }
     
+    
+    
     //
     // Nombre d'elements
     //
 public:
-    int size() {
-        return size(root);
+    int height(Node* x){
+        if( x == nullptr ) return -1;
+        
+        return x->nodeHeight;
     }
 private:
-    int size(Node* x) {
-        return ( x == nullptr ) ? 0 : x->nodeSize;
+    void updateNodeHeight(Node* x){
+        x->nodeHeight = max(height(x->right), height(x->left)) + 1;
     }
 }
 

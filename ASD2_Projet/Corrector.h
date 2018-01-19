@@ -9,6 +9,7 @@
 #define CORRECTOR_H
 
 #include <fstream>
+#include <iostream>
 #include <cctype>
 #include <string>
 #include <algorithm>
@@ -30,6 +31,9 @@ public:
      * @param dico_file_name nom du fichier représentant le dictionnaire
      */
     Corrector(std::string dico_file_name){
+        
+        std::cout << "Chargement du dico !" << std::endl;
+        
         // dictionaire ou stocker nos mots
         dictionary = DicoType();
         
@@ -40,27 +44,46 @@ public:
         if(file){
             
             std::string word;
-            word.clear();
+            //word.clear();
 
             while(!file.eof()){
+                
+                //std::cout << "DA" << std::endl;
                 word = getWord(file);
+                //std::cout << "DADA" << std::endl;
+                
+                //std::cout << word << std::endl;
                 dictionary.insert(word);
                 word.clear();
             }
         }
+        file.close();
+        
+        std::cout << "End chargement du dico !" << std::endl;
     }
     
-    
-    
-private:
     /**
      * Test l'ortho de fichier
      * @param test_file_name - nom du fichier à tester
      */
     void test(std::string test_file_name){
+        
+        
+        std::cout << "Start testing " << test_file_name << std::endl;
         std::ifstream file;
         
         file.open(test_file_name);
+        
+        std::string prefixFile = "corr_";
+        std::string prefixWord = "*";
+        
+        std::ofstream fileCorr;
+        fileCorr.open(prefixFile.append(test_file_name), std::ios::out);
+                
+        if(!fileCorr) {
+            std::cout << "Could not open " << prefixFile.append(test_file_name) << std::endl;
+            return;
+        }
         
         if(file){
             std::string word;
@@ -69,27 +92,33 @@ private:
             while(!file.eof()){
                 word = getWord(file);
                 if(!dictionary.contains(word)){
-                    testSupLetter(word);
-                    testMissingLetter(word);
-                    testWrongLetter(word);
-                    testExchangeLetter(word);
+                    
+                    fileCorr << "*" << word << std::endl;
+                    
+                    testSupLetter(word, fileCorr);
+                    testMissingLetter(word, fileCorr);
+                    testWrongLetter(word, fileCorr);
+                    testExchangeLetter(word, fileCorr);
                 }
             }
         }
+        file.close();
     }
     
+private:
     /**
      * Si mot non existant dans le dictionnaire, test si il y a pas une lettre
      *  supplementaire
      * @param word - mot à tester
      */
-    void testSupLetter(std::string word){
+    void testSupLetter(std::string word, std::ofstream& file){
         for(int i = 0; i < word.size(); ++i){
             std::string temp = word;
             if(dictionary.contains(temp.erase(i,1))){
 #ifdef VERBOSE
                 std::cout << " " << temp << std::endl;
 #endif
+                file << "1)" << word << std::endl;
             }
         }
     }
@@ -99,7 +128,7 @@ private:
      *  manquante
      * @param word
      */
-    void testMissingLetter(std::string word){
+    void testMissingLetter(std::string word, std::ofstream& file){
         for(int i = 0; i < word.size(); ++i){
             std::string temp = word;
             for(char j = 'a'; 'a' <= 'z'; ++j){
@@ -107,6 +136,7 @@ private:
 #ifdef VERBOSE
                     std::cout << " " << temp << std::endl;
 #endif  
+                file << "2)" << word << std::endl;
                 }
             }
         }
@@ -117,14 +147,16 @@ private:
      *  fausse
      * @param word
      */
-    void testWrongLetter(std::string word){
+    void testWrongLetter(std::string word, std::ofstream& file){
         for(int i = 0; i < word.size(); ++i){
             std::string temp = word;
             for(char j = 'a'; 'a' <= 'z'; ++j){
-                if(dictionary.contains(temp.replace(i,1,j))){
+                std::string str(1,j);
+                if(dictionary.contains(temp.replace(i,1,str))){
 #ifdef VERBOSE
                     std::cout << " " << temp << std::endl;
 #endif  
+                file << "3)" << word << std::endl;
                 }
             }
         }
@@ -135,7 +167,7 @@ private:
      *  inverser (une à coté de l'autre)
      * @param word
      */
-    void testExchangeLetter(std::string word){
+    void testExchangeLetter(std::string word, std::ofstream& file){
         for(int i = 0; i < word.size() - 1; ++i){
             std::string temp = word;
             std::swap(temp[i], temp[i+1]);
@@ -143,6 +175,7 @@ private:
 #ifdef VERBOSE
                 std::cout << " " << temp << std::endl;
 #endif  
+                file << "4)" << word << std::endl;
             }
         }
     }
@@ -152,16 +185,19 @@ private:
      * @param file
      * @return mot en minuscule avec que des l'etre et '
      */
-    std::string getWord(std::ifstream file){
+    std::string getWord(std::ifstream& file){
+        
         std::string word;
-        char x = file.get();
-        x = tolower(x);
-        while(x != ' '){
+        file >> word;
+        std::string properWord = "";
+        for(int i = 0 ; i < word.size(); i++) {
+            char x = tolower(word.at(i));
+            
             if((x > 'a' && x < 'z') || (x == '\'' && word.size() > 1)){
-                word += x;
+                properWord += x;
             }
-        }
-        return word;
+        }       
+        return properWord;
     }
 };
 
