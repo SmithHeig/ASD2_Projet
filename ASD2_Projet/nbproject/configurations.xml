@@ -9,6 +9,7 @@
       <itemPath>Corrector.h</itemPath>
       <itemPath>DicoHashMap.h</itemPath>
       <itemPath>DicoTST.h</itemPath>
+      <itemPath>TernarySearchTree.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -56,6 +57,8 @@
       </item>
       <item path="DicoTST.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="TernarySearchTree.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="dictionary.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="input_lates.txt" ex="false" tool="3" flavor2="0">
@@ -98,6 +101,8 @@
       <item path="DicoHashMap.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="DicoTST.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TernarySearchTree.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="dictionary.txt" ex="false" tool="3" flavor2="0">
       </item>

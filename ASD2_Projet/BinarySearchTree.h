@@ -79,7 +79,7 @@ private:
     // Insertion d'une paire cle / valeur.
     //
 public:
-    void put( const KeyType& key, ValueType value) {
+    void put(const KeyType& key, ValueType value) {
         root = put(root,key,value);
     }
     
