@@ -40,13 +40,13 @@ public:
         
         // extraction depuis le fichier et remplissage du dico
         std::ifstream file;
-        
+        long long int count = 0;
         file.open(dico_file_name);
         if(file){
             
             std::string word;
             //word.clear();
-
+            
             while(!file.eof()){
                 
                 //std::cout << "DA" << std::endl;
@@ -60,11 +60,12 @@ public:
                 //std::cout << word << std::endl;
                 dictionary.insert(word);
                 word.clear();
+                count ++;
             }
         }
         file.close();
         
-        std::cout << "End chargement du dico !" << std::endl;
+        std::cout << "End chargement du dico ! ("<< count << "words)" << std::endl;
     }
     
     /**
@@ -225,6 +226,11 @@ private:
         
         return properWord;
     }
+    
+public:
+        bool contain(std::string s){
+            return dictionary.contains(s);
+        }
 };
 
 #endif /* CORRECTOR_H */

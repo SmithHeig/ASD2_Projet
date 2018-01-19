@@ -14,6 +14,14 @@
 #include <cstdlib>
 #include "Corrector.h"
 #include "DicoHashMap.h"
+#include "TernarySearchTree.h"
+#include "DicoTST.h"
+
+#define DICO "dictionary.txt"
+#define LATES "input_lates.txt"
+#define SH "input_sh.txt"
+#define SIMPLE "input_simple.txt"
+#define WIKIPEDIA "input_wikipedia.txt"
 
 using namespace std;
 
@@ -43,19 +51,19 @@ int main(int argc, char** argv) {
      /*
     //initialisation du correcteur 
     Corrector<DicoHashMap<std::string>> corrector_HashMap(DICO); 
-    //Corrector<DicoTST<std::string>> corrector_TST(DICO); 
+    Corrector<DicoTST> corrector_TST(DICO); 
      
     // Correction 
     // DicoHashMap 
     std::cout << "Hash map:" << std::endl; 
     corrector_HashMap.test(LATES); 
     // corrector_HashMap.test(SH);  // TO not work (On doit traité les '
-    corrector_HashMap.test(SIMPLE); 
-    corrector_HashMap.test(WIKIPEDIA); 
+    //corrector_HashMap.test(SIMPLE); 
+    //corrector_HashMap.test(WIKIPEDIA); 
     std::cout << std::endl; 
-     
+    
     // DicoTST 
-    /*std::cout << "Hash map:" << std::endl; 
+    std::cout << std::endl << "TST test:" << std::endl;
     corrector_TST.test(LATES); 
     corrector_TST.test(SH); 
     corrector_TST.test(SIMPLE); 
