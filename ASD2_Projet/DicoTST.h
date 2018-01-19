@@ -14,7 +14,7 @@
 #ifndef DICOTST_H
 #define DICOTST_H
 
-class DicoHashMap {
+class DicoTST {
 public:
     
     DicoHashMap(){
@@ -26,6 +26,10 @@ public:
     }
     void insert(std::string word) {
         //dictionary.insert(word);
+    }
+    
+    static std::string name(){
+        return "Dico using TST";
     }
 private:
     //std::unordered_set<T> dictionary;

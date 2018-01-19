@@ -31,7 +31,16 @@ int main(int argc, char** argv) {
     const std::string SH = "input_sh.txt"; 
     const std::string SIMPLE = "input_simple.txt"; 
     const std::string WIKIPEDIA = "input_wikipedia.txt"; 
-     
+    
+    
+    Corrector<DicoHashMap<std::string>> c(DICO);
+    
+    c.test(SH);
+    
+    //c.test(WIKIPEDIA);
+    
+    
+     /*
     //initialisation du correcteur 
     Corrector<DicoHashMap<std::string>> corrector_HashMap(DICO); 
     //Corrector<DicoTST<std::string>> corrector_TST(DICO); 
@@ -51,7 +60,8 @@ int main(int argc, char** argv) {
     corrector_TST.test(SH); 
     corrector_TST.test(SIMPLE); 
     corrector_TST.test(WIKIPEDIA);*/ 
-       
+    
+    
     return 0;
 }
 
