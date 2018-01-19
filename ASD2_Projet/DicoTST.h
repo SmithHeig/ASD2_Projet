@@ -14,21 +14,23 @@
 #ifndef DICOTST_H
 #define DICOTST_H
 
+#include "TernarySearchTree.h"
+
 class DicoHashMap {
 public:
     
     DicoHashMap(){
-        //dictionary = std::unordered_set<T>();
+        dictionary = TernarySearchtree();
     }
     
     bool contains(std::string word){
-        return false; //(dictionary.find(word) != dictionary.end);
+        return dictionary.contains(word);
     }
     void insert(std::string word) {
-        //dictionary.insert(word);
+        dictionary.insert(word);
     }
 private:
-    //std::unordered_set<T> dictionary;
+    TernarySearchtree dictionary;
 };
 
 #endif /* DICOTST_H */

@@ -199,6 +199,11 @@ private:
         }       
         return properWord;
     }
+    
+public:
+        bool contain(std::string s){
+            dictionary.contains(s);
+        }
 };
 
 #endif /* CORRECTOR_H */

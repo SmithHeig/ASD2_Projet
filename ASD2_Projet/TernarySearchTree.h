@@ -44,14 +44,14 @@ private:
     // Constructeur. La racine est vide
     //
 public:
-    BinarySearchTree() : root(nullptr) { }
+    TernarySearchtree() : root(nullptr) { }
     
         
     //
     // Destructeur.
     //
 public:
-    ~BinarySearchTree() {
+    ~TernarySearchtree() {
         deleteSubTree( root );
     }
 private:
@@ -64,24 +64,25 @@ private:
     }
     
 public:
-    void Node put(std::string* key){
-        root = put(*root, key);
+    void insert(std::string& key){
+        std::cout << "Insert key: " << key << std::endl;
+        root = put(root, key);
     }
     
-    Node put(Node* x, std::string* key, int d = 0, bool val = true){
-        char c = *(key + d);
+    Node* put(Node* x, std::string& key, int d = 0, bool val = true){
+        char c = key.at(d);
         
         if(x == nullptr) 
-            x = *(new Node(c));
+            x = new Node(c);
         
-        if( c < x.key)
-            x.left = put(x.left, key, d);
-        else if ( c < x.key)
-            x.right = put(x.right, key, d);
-        else if (d < (*key).size() -1)
+        if( c < x->key)
+            x->left = put(x->left, key, d);
+        else if ( c < x->key)
+            x->right = put(x->right, key, d);
+        else if (d < key.size() -1)
             x->front = put(x->front, key, d+1);
         else
-            x.isWord = val;
+            x->isWord = val;
         
         return restoreBalance(x);
     }
@@ -185,9 +186,9 @@ public:
     }
 private:
     void updateNodeHeight(Node* x){
-        x->nodeHeight = max(height(x->right), height(x->left)) + 1;
+        x->nodeHeight = std::max(height(x->right), height(x->left)) + 1;
     }
-}
+};
 
 
 
