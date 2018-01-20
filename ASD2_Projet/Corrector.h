@@ -242,6 +242,10 @@ public:
         bool contain(std::string s){
             return dictionary.contains(s);
         }
+        
+        bool isBalanced(){
+            return dictionary.isBalanced();       
+        }
 };
 
 #endif /* CORRECTOR_H */

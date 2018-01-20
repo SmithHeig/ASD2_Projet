@@ -63,12 +63,25 @@ private:
         delete x;
     }
     
+    
 public:
+    /**
+     * Insertion d'une string dans le TST
+     * @param key string à insérer
+     */
     void insert(std::string& key){
-        //std::cout << "Insert key: " << key << std::endl;
         root = put(root, key);
     }
     
+private:
+    /**
+     * Insertion d'une string char par char dans le TST
+     * @param x     racine d'insértion
+     * @param key   contient la string à insérer
+     * @param d     position du caractère courant à insérer
+     * @param val   valeur qui indique la fin du mot
+     * @return      racine du TST après rebalançage
+     */
     Node* put(Node* x, std::string& key, int d = 0, bool val = true){
         char c = key.at(d);
         
@@ -87,12 +100,20 @@ public:
         return restoreBalance(x);
     }
     
+    /**
+     * 
+     * @param x 
+     * @return difference de hauteur entre droit et gauche
+     */
     int balance(Node* x){
-        if(x == nullptr)
-            return 0;
-        return height(x->right) - height(x->left);
+        return x == nullptr ? 0 : height(x->right) - height(x->left);
     }
     
+    /**
+     * Restauration par rotation simple ou double
+     * @param x     Noeud de départ
+     * @return      racine du TST après rebalançage
+     */
     Node* restoreBalance(Node* x){
         if(balance(x) < -1) { // right < left -1
             if(balance(x->left) > 0)
@@ -109,6 +130,11 @@ public:
         return x;
     }
     
+    /**
+     * Effecture une rotation à droite
+     * @param x  Noeud de base
+     * @return   Nouveau neaud de base
+     */
     Node* rotateRight(Node* x){
         Node* x1 = x->left;
         x->left = x1->right;
@@ -120,6 +146,11 @@ public:
         return x1;
     }
     
+     /**
+     * Effecture une rotation à gauche
+     * @param x  Noeud de base
+     * @return   Nouveau neaud de base
+     */
     Node* rotateLeft(Node* x){
         Node* x1 = x->right;
         x->right = x1->left;
@@ -131,42 +162,25 @@ public:
         return x1;
     }
     
-//public:
-//     void insert(std::string s){
-//         Node* x = root;
-//         
-//        for(char& c : s){
-//             x = insertChar(x, *c);
-//        }
-//         
-//        x->isWord = true;
-//        
-//     }
-//private:
-//    Node* insertChar(Node* x, char key){
-//        if(x == nullptr)
-//            return new Node(key);
-//        
-//        if(key < x.key)
-//            x = x.left;
-//        else if(key > x->key)
-//            x = x.right;
-//        else // key == y->key
-//            x = x.front;
-//        
-//        x->nodeSize = 1 + size(x->left) + size(x->right) + size(x->front);
-//        
-//        return x;
-//    }
     
 public:
+    /**
+     * Indique si un string est contenu dans le TST
+     * @param s     Chaine à rechercher
+     * @return      true si la chaine est dans le TST, autrement false
+     */
     bool contains(std::string& s){
         // std::cout << "Get key: " << s << std::endl;
-        Node* x = get(root, s, 0);
+        Node* x = contains(root, s, 0);
         return !(x == nullptr || x->isWord != true);
     }
 private:
-    Node* get(Node* x, std::string& key, int d){
+    /**
+     * Indique si un string est contenu dans le TST
+     * @param s     Chaine à rechercher
+     * @return      true si la chaine est dans le TST, autrement false
+     */
+    Node* contains(Node* x, std::string& key, int d){
         if(x == nullptr) 
             return nullptr;
         
@@ -180,37 +194,70 @@ private:
             return get(x->front, key, d+1);
         else
             return x;
-            
     }
 
     
     //
     // Nombre d'elements
     //
-public:
+private:
+    /**
+     * Indique la heuteur d'un noeud
+     * @param x Noeud 
+     * @return  Hauteur
+     */
     int height(Node* x){
         if( x == nullptr ) return -1;
         
         return x->nodeHeight;
     }
-private:
+
+    /**
+     * Met à jour la hauteur d'un noeud
+     * @param x Noeud à mettre à jour
+     */
     void updateNodeHeight(Node* x){
         x->nodeHeight = std::max(height(x->right), height(x->left)) + 1;
     }
   
-    /*
-public:
-    int checkHeight(){
-        return che
-    }
     
-    int checkHeight(Node* x){
-        if(abs(x.nodeHeight)
+    // Fonction de test si un arbre est balancé inspiré de :
+    // https://www.geeksforgeeks.org/how-to-determine-if-a-binary-tree-is-balanced/
+public:
+    /**
+     * Indique si l'arbre est balancé à partir de sa racine
+     * @return true si balancé, autrement false
+     */
+    bool isBalanced(){
+        return isBalanced(root);
     }
-     * */
+private: 
+    /**
+     * Indique si l'arbre est balancé à partir d'un noeud
+     * @param x Noeud de départ
+     * @return true si balancé, autrement false
+     */
+    bool isBalanced(Node* x)
+    {
+       int lh; /* for height of left subtree */
+       int rh; /* for height of right subtree */ 
+
+       /* If tree is empty then return true */
+       if(x == nullptr)
+        return 1; 
+
+       /* Get the height of left and right sub trees */
+       lh = height(x->left);
+       rh = height(x->right);
+
+       if( abs(lh-rh) <= 1 &&
+           isBalanced(x->left) &&
+           isBalanced(x->right))
+         return 1;
+
+       /* If we reach here then tree is not height-balanced */
+       return 0;
+    }
 };
-
-
-
 #endif /* TERNARYSEARCHTREE_H */
 
