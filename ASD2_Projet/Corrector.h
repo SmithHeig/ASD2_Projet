@@ -238,11 +238,11 @@ private:
         return properWord;
     }
     
-public:
-        bool contain(std::string s){
-            return dictionary.contains(s);
-        }
-        
+public:        
+        /**
+         * Indique si un abre TST est balancé
+         * @return true si il est baancé, false sinon
+         */
         bool isBalanced(){
             return dictionary.isBalanced();       
         }
