@@ -187,11 +187,11 @@ private:
         char c = key.at(d);
         
         if( c < x->key)
-            return get(x->left, key, d);
+            return contains(x->left, key, d);
         else if ( c > x->key)
-            return get(x->right, key, d);
+            return contains(x->right, key, d);
         else if (d < key.length() - 1)
-            return get(x->front, key, d+1);
+            return contains(x->front, key, d+1);
         else
             return x;
     }

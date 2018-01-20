@@ -32,11 +32,7 @@ int main(int argc, char** argv) {
     std::cout << "Starto correcto!" << std::endl;
     c.test("MON_TEXTE.txt");*/
     //Corrector<DicoHashMap<std::string>> c("dictionary.txt"); 
-    const std::string DICO = "dictionary.txt"; 
-    const std::string LATES = "input_lates.txt"; 
-    const std::string SH = "input_sh.txt"; 
-    const std::string SIMPLE = "input_simple.txt"; 
-    const std::string WIKIPEDIA = "input_wikipedia.txt"; 
+
     
     
     Corrector<DicoHashMap<std::string>> c(DICO);
