@@ -5,23 +5,23 @@
  */
 
 /* 
- * File:   DicoHashMap.h
+ * File:   DicoSet.h
  * Author: dname
  *
- * Created on January 12, 2018, 9:41 AM
+ * Created on January 19, 2018, 3:07 PM
  */
 
-#ifndef DICOHASHMAP_H
-#define DICOHASHMAP_H
+#ifndef DICOSET_H
+#define DICOSET_H
 
-#include <unordered_set>
+#include <set>
 
 template <typename T>
-class DicoHashMap {
+class DicoSet {
 public:
     
-    DicoHashMap(){
-        dictionary = std::unordered_set<T>();
+    DicoSet(){
+        dictionary = std::set<T>();
     }
     
     bool contains(T word){
@@ -32,11 +32,11 @@ public:
     }
     
     static std::string name(){
-        return "Dico using unordered_set";
+        return "Dico using set";
     }
 private:
-    std::unordered_set<T> dictionary;
+    std::set<T> dictionary;
 };
 
-#endif /* DICOHASHMAP_H */
+#endif /* DICOSET_H */
 

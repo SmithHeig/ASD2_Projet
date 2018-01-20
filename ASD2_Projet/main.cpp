@@ -16,6 +16,7 @@
 #include "DicoHashMap.h"
 #include "TernarySearchTree.h"
 #include "DicoTST.h"
+#include "DicoSet.h"
 
 #define DICO "dictionary.txt"
 #define LATES "input_lates.txt"
@@ -32,12 +33,33 @@ int main(int argc, char** argv) {
     std::cout << "Starto correcto!" << std::endl;
     c.test("MON_TEXTE.txt");*/
     //Corrector<DicoHashMap<std::string>> c("dictionary.txt"); 
-
+    const std::string DICO = "dictionary.txt"; 
+    const std::string LATES = "input_lates.txt"; 
+    const std::string SH = "input_sh.txt"; 
+    const std::string SIMPLE = "input_simple.txt"; 
+    const std::string WIKIPEDIA = "input_wikipedia.txt"; 
     
+    // les différents dico a notre disposition
+    Corrector<DicoHashMap<std::string>> corHM(DICO);
+    Corrector<DicoTST> corTST(DICO);
+    Corrector<DicoSet<std::string>> corSET(DICO);
     
-    Corrector<DicoHashMap<std::string>> c(DICO);
+    corHM.test(LATES);
+    corTST.test(LATES);
+    corSET.test(LATES);
     
-    c.test(SH);
+    corHM.test(SIMPLE);
+    corTST.test(SIMPLE);
+    corSET.test(SIMPLE);
+    
+    corHM.test(SH);
+    corTST.test(SH);
+    corSET.test(SH);
+    
+    corHM.test(WIKIPEDIA);
+    corTST.test(WIKIPEDIA);
+    corSET.test(WIKIPEDIA);
+    
     
     //c.test(WIKIPEDIA);
     

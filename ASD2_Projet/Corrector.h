@@ -15,7 +15,7 @@
 #include <algorithm>
 #include <chrono>
 
-#define VERBOSE 1
+//#define VERBOSE
 
 /**
  * @class Corrector
@@ -34,6 +34,7 @@ public:
     Corrector(std::string dico_file_name){
         
         std::cout << "Chargement du dico en mode " << DicoType::name() << std::endl;
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
         
         // dictionaire ou stocker nos mots
         dictionary = DicoType();
@@ -65,7 +66,10 @@ public:
         }
         file.close();
         
-        std::cout << "End chargement du dico ! ("<< count << "words)" << std::endl;
+        std::chrono::steady_clock::time_point end= std::chrono::steady_clock::now();
+        std::cout << "End chargement du dico ! ("<< count << "words) ";
+        std::cout << "Time elapsed = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << " milliseconds."<< std::endl;
+
     }
     
     /**
@@ -78,9 +82,8 @@ public:
         
         std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
         
-#ifdef VERBOSE  
-        std::cout << "Start testing " << test_file_name << endl;
-#endif
+        std::cout << "Start testing " << test_file_name << " with " << DicoType::name() << std::endl;
+        
         std::ifstream file;
         
         file.open(test_file_name);
@@ -117,15 +120,18 @@ public:
                     testMissingLetter(word, fileCorr);
                     testWrongLetter(word, fileCorr);
                     testExchangeLetter(word, fileCorr);
+#ifdef VERBOSE
                     std::cout << std::endl;
+#endif
                 }
             }
         }
         file.close();
         
+        // affichage du temps que ça a pris
         std::chrono::steady_clock::time_point end= std::chrono::steady_clock::now();
-
-        std::cout << "Time elapsed = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() <<std::endl;
+        std::cout << "End testing " << test_file_name << " ";
+        std::cout << "Time elapsed = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << " microseconds."<< std::endl << std::endl;
 
     }
     
@@ -219,10 +225,15 @@ private:
         for(int i = 0 ; i < word.size(); i++) {
             char x = tolower(word.at(i));
 
-            if((x >= 'a' && x <= 'z') || (x == '\'' && word.size() > 1)){
+            if((x >= 'a' && x <= 'z') || (x == '\'' && properWord.size() > 1)){
                 properWord += x;
             }
         }  
+        
+        // test pour l'apostrophe final
+        if(properWord.back() == '\''){
+            properWord = properWord.substr(0, properWord.size()-2);
+        }
         
         return properWord;
     }

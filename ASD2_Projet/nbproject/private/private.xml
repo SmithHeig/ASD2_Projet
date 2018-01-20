@@ -7,10 +7,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Jeremie/Documents/HEIG/ASD2/Labo/Labo5/ASD2_Projet/ASD2_Projet/Corrector.h</file>
-            <file>file:/C:/Users/Jeremie/Documents/HEIG/ASD2/Labo/Labo5/ASD2_Projet/ASD2_Projet/main.cpp</file>
-            <file>file:/C:/Users/Jeremie/Documents/HEIG/ASD2/Labo/Labo5/ASD2_Projet/ASD2_Projet/TernarySearchTree.h</file>
-            <file>file:/C:/Users/Jeremie/Documents/HEIG/ASD2/Labo/Labo5/ASD2_Projet/ASD2_Projet/DicoTST.h</file>
+            <file>file:/C:/Users/dname/OneDrive/HEIG/ASD2/Labos/ASD2_labo05/ASD2_Projet/ASD2_Projet/DicoSet.h</file>
+            <file>file:/C:/Users/dname/OneDrive/HEIG/ASD2/Labos/ASD2_labo05/ASD2_Projet/ASD2_Projet/Corrector.h</file>
+            <file>file:/C:/Users/dname/OneDrive/HEIG/ASD2/Labos/ASD2_labo05/ASD2_Projet/ASD2_Projet/main.cpp</file>
+            <file>file:/C:/Users/dname/OneDrive/HEIG/ASD2/Labos/ASD2_labo05/ASD2_Projet/ASD2_Projet/DicoHashMap.h</file>
+            <file>file:/C:/Users/dname/OneDrive/HEIG/ASD2/Labos/ASD2_labo05/ASD2_Projet/ASD2_Projet/AVLTree.h</file>
+            <file>file:/C:/Users/dname/OneDrive/HEIG/ASD2/Labos/ASD2_labo05/ASD2_Projet/ASD2_Projet/DicoTST.h</file>
         </group>
     </open-files>
 </project-private>
