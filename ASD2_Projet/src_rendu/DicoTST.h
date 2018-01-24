@@ -51,15 +51,10 @@ public:
         return dictionary.isBalanced();
     }
     
-    int height(){
-        return dictionary.height();
-    }
-    
     
     static std::string name(){
         return "TST";
     }
-    
 private:
     TernarySearchtree dictionary;
 };

@@ -18,8 +18,6 @@
 #include "DicoTST.h"
 #include "DicoSet.h"
 
-#define DICO3 "myInput2.txt"
-#define DICO2 "myInput.txt"
 #define DICO "dictionary.txt"
 #define LATES "input_lates.txt"
 #define SH "input_sh.txt"
@@ -42,8 +40,6 @@ int main(int argc, char** argv) {
     // pourtant elle ne prends même pas 2 fois le temps des autres donc reste potable
     // Celui-ci a ses insertion, recherche et supression en O(log(n))
     // nous voulions comparer quelquechose en O(log(n)) avec nos 2 structures a temps constant
-    std::cout << "TST is HEIGT: " << corTST.height() << std::endl << std::endl;
-    
     Corrector<DicoSet<std::string>> corSET(DICO);
     
     
