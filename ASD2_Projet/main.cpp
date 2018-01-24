@@ -36,13 +36,13 @@ int main(int argc, char** argv) {
     
     // Celui-ci est notre implémentation du TST avec insertion, recherche et suppression en temps constant en moyenne
     Corrector<DicoTST> corTST(DICO);
-    std::cout << "TST is balanced: " << corTST.isBalanced() << std::endl << std::endl;
+    std::cout << "TST is balanced: " << corTST.isBalanced() << std::endl;
+        std::cout << "TST height: " << corTST.height() << std::endl << std::endl;
     
     // pour finir une structure "BONUS" pour comparer avec les deux autres (celle-ci n'est pas en temps constant 
     // pourtant elle ne prends même pas 2 fois le temps des autres donc reste potable
     // Celui-ci a ses insertion, recherche et supression en O(log(n))
     // nous voulions comparer quelquechose en O(log(n)) avec nos 2 structures a temps constant
-    std::cout << "TST is HEIGT: " << corTST.height() << std::endl << std::endl;
     
     Corrector<DicoSet<std::string>> corSET(DICO);
     
