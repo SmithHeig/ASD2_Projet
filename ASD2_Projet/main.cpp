@@ -18,6 +18,8 @@
 #include "DicoTST.h"
 #include "DicoSet.h"
 
+#define DICO3 "myInput2.txt"
+#define DICO2 "myInput.txt"
 #define DICO "dictionary.txt"
 #define LATES "input_lates.txt"
 #define SH "input_sh.txt"
@@ -41,8 +43,10 @@ int main(int argc, char** argv) {
     
     // les différents dico a notre disposition
     Corrector<DicoHashMap<std::string>> corHM(DICO);
-    Corrector<DicoTST> corTST(DICO);
+    Corrector<DicoTST> corTST(DICO2);
     std::cout << "TST is balanced: " << corTST.isBalanced() << std::endl << std::endl;
+    std::cout << "TST is HEIGT: " << corTST.height() << std::endl << std::endl;
+    
     Corrector<DicoSet<std::string>> corSET(DICO);
     
     corHM.test(LATES);

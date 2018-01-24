@@ -97,6 +97,7 @@ private:
         else
             x->isWord = val;
         
+        // restaure l'équilibre de l'arbre et met à jour les hauteurs.
         return restoreBalance(x);
     }
     
@@ -110,7 +111,7 @@ private:
     }
     
     /**
-     * Restauration par rotation simple ou double
+     * Restauration par rotation simple ou double et met à jour les hauteurs
      * @param x     Noeud de départ
      * @return      racine du TST après rebalançage
      */
@@ -211,6 +212,10 @@ private:
         
         return x->nodeHeight;
     }
+public: 
+    int height(){
+        return height(root);
+    }
 
     /**
      * Met à jour la hauteur d'un noeud
@@ -236,7 +241,7 @@ private:
      * Indique si l'arbre est balancé à partir d'un noeud
      * @param x Noeud de départ
      * @return true si balancé, autrement false
-     */
+     */ 
     bool isBalanced(Node* x)
     {
        int lh; /* for height of left subtree */

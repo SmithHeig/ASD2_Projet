@@ -246,6 +246,10 @@ public:
         bool isBalanced(){
             return dictionary.isBalanced();       
         }
+        
+        int height(){
+            return dictionary.height();
+        }
 };
 
 #endif /* CORRECTOR_H */
