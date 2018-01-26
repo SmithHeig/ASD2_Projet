@@ -44,12 +44,7 @@ int main(int argc, char** argv) {
     // pour finir une structure "BONUS" pour comparer avec les deux autres (celle-ci n'est pas en temps constant 
     // pourtant elle ne prends même pas 2 fois le temps des autres donc reste potable
     // Celui-ci a ses insertion, recherche et supression en O(log(n))
-<<<<<<< HEAD
-    // nous voulions comparer quelquechose en O(log(n)) avec le TST
-=======
-    // nous voulions comparer quelquechose en O(log(n)) avec nos 2 structures a temps constant
-    
->>>>>>> master
+
     Corrector<DicoSet<std::string>> corSET(DICO);
     
     Corrector<DicoAvl<std::string>> corAVL(DICO);
